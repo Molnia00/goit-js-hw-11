@@ -17,15 +17,26 @@ import { renderPhoto, clearList } from './js/render-functions'
 const inputSearch = document.querySelector('.inputSearch');
 const btnSearch = document.querySelector('.btnSearch');
 const loadingText = document.querySelector('.loading-text');
+const searchForm = document.querySelector('.search-form');
 
 
+searchForm.addEventListener('submit', getInfo);
 
-btnSearch.addEventListener('click', getInfo);
 
-
-function getInfo() {
+function getInfo(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const searchStr = formData.get('inputSearch').trim();
     
-    const searchStr = inputSearch.value;
+    if (!searchStr) {
+        iziToast.warning({
+            title: 'Caution',
+            message: 'You forgot to write search. Please try again!',
+            position: 'topRight',
+        });
+        return
+    }
+
     console.log(searchStr);
     clearInput();
     clearList();
@@ -62,7 +73,14 @@ function getInfo() {
 
         })
         .catch(error => {
+            hideLoad();
             console.log('error', error);
+            iziToast.error({
+                title: 'Error',
+                message: 'Something go wrong. Please try again!',
+                position: 'topRight',
+                });
+                return
         })
 }
 

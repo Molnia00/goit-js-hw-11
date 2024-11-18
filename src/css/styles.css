@@ -67,6 +67,7 @@
 display: flex;
 flex-wrap: wrap;
 gap: 24px;
+margin-top: 20px;
 }
 .list li{
   display: flex;
@@ -109,6 +110,10 @@ height: 100%;
 }
 
 
-
+.loading-text{
+  width: 100%;
+  text-align: center;
+  margin-top: 35px;
+}
 
 
